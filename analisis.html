@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+    <meta charset="utf-8">
+    <title>Analisis de CUPS</title>
+    <style> 
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #1f4e79;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+    .contenedor {
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        .tarjeta {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+        textarea{
+            width: 100%;
+            height: 250px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button{
+            background-color: #1f4e79;
+            color: white;
+            border: none;
+            padding: 10px 20 px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #163a5c;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Analisis de multiples CUPS</h1>
+</header>
+<div class="contenedor">
+    <div class="tarjeta">
+        <h2>Introduzca uno o varios CUPS</h2>
+        <p>
+            Escriba un CUPS por linea
+        </p>
+        <form action="/analizar" method="post">
+              <textarea 
+              name="cups"
+              placeholder="ES1234567890&#;ES0987654321&#,ES1122334455"
+              required></textarea>
+              <br><br>
+              <button type="submit">
+                Analizar
+              </button>
+       </form>
+       <br>
+       <a href="/">
+        <button type="button">
+            Volver
+        </button>
+       </a>
+
+    </div>
+</div>
+
+</body>
+</html>

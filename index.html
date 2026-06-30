@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Buscador de CUPS</title>
+        <style>
+            body{
+                font-family: Arial;
+                margin:40px;
+            }
+            input{
+                width:500px;
+                padding:10px;
+            }
+            button{
+                padding:10px;
+            }
+            pre{
+                background-color:#f5f5f5;
+                padding:15px;
+                border: 1px solid #ccc;
+                white-space:pre-wrap
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Buscador de CUPS</h1>
+       
+       
+    <form method="POST">
+        <input 
+        type="text"
+        name="cups"
+        placeholder="Introduce el CUPS"
+        required
+        >
+        <button type="submit">
+        Buscar
+        </button>
+    </form>
+<br>
+<pre
+    style=" white-space: pre-wrap; 
+    max-height: 600px;
+    overflow-y: scroll;">
+    {{resultado}}</pre>
+
+    </body>
+</html>

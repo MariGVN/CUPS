@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale1.0">
+    <title>Buscador CUPS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1f4e79;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .contenedor {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+        .tarjeta {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+        h2{
+            color:#1f4e79;
+        }
+
+        input{
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button{
+            background: #1f4e79;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background: #163a5c;
+        }
+
+        .archivo{
+            background: #eef3f8;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+        .hojas{
+            margin-left: 20px;
+        }
+        .info{
+            background: #fff9dc;
+            padding: 10px;
+            border-left: 5px solid orange;
+        }
+        
+        </style>
+</head>
+
+<body>
+<header>
+     <h1>Gestión y búsqueda de CUPS</h1>
+     <p>Consulta de datos desde archivos Excel</p>
+</header>
+<div class="contenedor">
+    <div class="tarjeta">
+
+    <h2>Subir archivo Excel</h2>
+
+    <form action="/subir"
+          method="post"
+          enctype="multipart/form-data">
+
+        <input type="file"
+               name="excel"
+               required>
+        <br>
+
+        <button type="submit">
+            Subir excel
+        </button>
+
+    </form>
+</div>
+
+<div class="tarjeta">
+<h2>Buscar CUPS</h2>
+
+    <form action="/buscar"
+          method="post">
+
+        <input type="text"
+               name="cups"
+               placeholder="Introduce CUPS"
+               required>
+        <br>
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
+<hr>
+<h2>Analisis de multiples CUPS</h2>
+<a href="/analisis">
+    <button type="button">
+        Abrir analisis
+    </button>
+</a>
+</div>
+<div class="tarjeta"> 
+
+    <h2>Excels cargados</h2>
+    {% if archivos %}
+
+<a href="/eliminar_todos"
+   onclick="return confirm('¿Seguro que deseas eliminar TODOS los archivos Excel?');">
+
+    <button
+        type="button"
+        style="background:#b22222; margin-bottom:15px;">
+
+        Eliminar todos los Excel
+
+    </button>
+
+</a>
+
+{% endif %}
+
+    {% if archivos %}
+
+        {% for archivo in archivos %}
+<div class="archivo">
+            <h3>{{ archivo.nombre }}</h3>
+<p>
+    Hojas disponibles:
+</p>
+            <ul class="hojas">
+
+                {% for hoja in archivo.hojas %}
+                    <li>{{ hoja }}</li>
+                {% endfor %}
+
+            </ul>
+            <br>
+
+<a href="/eliminar/{{ archivo.nombre }}"
+   onclick="return confirm('¿Seguro que deseas eliminar este archivo?');">
+
+    <button type="button">
+        Eliminar archivo
+    </button>
+
+</a>
+</div>
+        {% endfor %}
+
+    {% else %}
+
+        <p>No hay archivos cargados.</p>
+
+    {% endif %}
+</div>
+<div class="tarjeta info">
+    <h3> Ayuda</h3>
+    <ul>
+        <li>Suba un archivo de excel antes de buscar.</li>
+        <li>Introduzca el CUPS completo</li>
+        <li>Los resultados aparecerán después de la búsqueda</li>
+        <li>La búsqueda puede tardar unos minutos.</li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

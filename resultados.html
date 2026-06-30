@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale1">
+    <title>Resultados</title>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+    }
+    header {
+            background: #1f4e79;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    .contenedor {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+        .tarjeta {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+        h1{
+            margin: 0;
+        }
+        h2{
+            color: #1f4e79;
+        }
+        h3{
+            color: #444;
+        }
+        a{
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        a:hover{
+            background-color: #163a5c;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th{
+           background-color: #1f4e79;
+           color: white;
+           text-align: left; 
+        }
+        th, td{
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+        .cups{
+            background: #eef5ff;
+            padding: 15px;
+            border-left: 5px solid #1f4e79;
+            margin-top: 20px;
+        }
+        .noresultados{
+            background: #ffeaea;
+            padding: 20px;
+            border-left: 5px solid red;
+        }
+</style>
+
+</head>
+
+<body>
+
+    <header>Resultados búsqueda CUPS</header>
+<div class="contenedor">
+    <div class="tarjeta">
+        <div class="cups">
+    <h2>Resultados para {{ cups }}</h2>
+        </div>
+        <br>
+    <a href="/">
+        Volver al buscador
+    </a>
+    </div>
+    
+
+    {% if resultados %}
+
+        {% for r in resultados %}
+        <div clas="tarjeta">
+
+            <h2>Archivo: {{ r.archivo }}</h2>
+
+            <h3>Hoja: {{ r.hoja }}</h3>
+
+            <table>
+                <tr>
+                    <th>
+                        Campo
+                    </th>
+                    <th>
+                        Valor
+                    </th>
+                </tr>
+
+                {% for campo, valor in r.datos.items() %}
+
+                <tr>
+                    <th>{{ campo }}</th>
+                    <td>{{ valor }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+            <br>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+    <div class="tarjeta noresultado"> 
+
+        <h2>No se encontró el CUPS</h2>
+<p> Compruebe que el CUPS introducido es correcto y que el excel cargado contenga esa información.</p>
+    </div>   
+{% endif %}
+</div>
+</body>
+</html>
