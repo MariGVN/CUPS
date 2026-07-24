@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
-    
+<html lang="es"> 
 <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale1.1">
+
     <title>Analisis de CUPS</title>
+    <link 
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style> 
     body{
         font-family: Arial, sans-serif;
@@ -15,8 +19,14 @@
     header {
         background-color: #1f4e79;
         color: white;
-        padding: 20px;
+        padding: 35px;
         text-align: center;
+    }
+    header i{
+        font-size: 45px;
+    }
+    header h1{
+        margin: 10px;
     }
     .contenedor {
             width: 90%;
@@ -25,23 +35,34 @@
         }
         .tarjeta {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px #ccc;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px #ccc;
+            margin-bottom: 25px;
+        }
+        h2{
+            color: #1f4e79;
+        }
+        h2 i{
+            margin-right: 10px;
         }
         textarea{
-            width: 100%;
+            width: 95%;
             height: 250px;
-            padding: 10px;
-            box-sizing: border-box;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            resize: none;
         }
         button{
             background-color: #1f4e79;
             color: white;
             border: none;
-            padding: 10px 20 px;
-            border-radius: 5px;
+            padding: 13px 30px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover{
             background-color: #163a5c;
@@ -49,36 +70,73 @@
         a{
             text-decoration: none;
         }
+        .info{
+            background: #fff9dc;
+            border-left: 6px solid orange;
+        }
+        .volver{
+            text-decoration: none;
+            color: white;
+            background: #555;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1>Analisis de multiples CUPS</h1>
+    <i class="fa-solid fa-chart-column"></i>
+    <h1>Análisis de múltiples CUPS</h1>
 </header>
 <div class="contenedor">
     <div class="tarjeta">
-        <h2>Introduzca uno o varios CUPS</h2>
+        <h2>
+            <i class="fa-solid fa-list"></i>
+            Introduzca 2 o más CUPS</h2>
         <p>
-            Escriba un CUPS por linea
+            Escriba un CUPS por línea
         </p>
         <form action="/analizar" method="post">
               <textarea 
               name="cups"
-              placeholder="ES1234567890&#;ES0987654321&#,ES1122334455"
+              placeholder="Ejemplo:
+              ES1234567890&#
+              ES0987654321&#
+              ES1122334455"
               required></textarea>
               <br><br>
               <button type="submit">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
                 Analizar
               </button>
        </form>
-       <br>
-       <a href="/">
-        <button type="button">
+    </div>
+    <div class="tarjeta info">
+        <h2>
+            <i class="fa-solid fa-circle-info"></i>
+            Recomendaciones
+        </h2>
+        <ul>
+            <li>
+                Introduzca un CUPS por línea.
+            </li>
+            <li>
+                Verifique que los archivos excel estén subidos previo al análisis.
+            </li>
+            <li>
+                El tiempo de procesamiento dependerá del tamaño de los archivos y de cuantos CUPS vayan a analizarse.
+            </li>
+            <li>
+                Después del análisis se podrá consultar patrones y exportar resultados.
+            </li>
+        </ul>
+    </div>
+
+       <a href="/" class="volver">
+        <i class="fa-solid fa-house"></i>
             Volver
         </button>
        </a>
-
-    </div>
 </div>
 
 </body>
