@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Analisis de CUPS</title>
+     <link 
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body{
         font-family: Arial, sans-serif;
@@ -66,24 +69,49 @@
         a{
             text-decoration: none;
         }
+        .botones{
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
         .boton{
-            background-color: #1f4e79;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1f4e79;
             color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .boton:hover{
+            background: #163a5c;
+            transform: translateY(-2px);
+        }
+        .boton.excel{
+            background: #217346;
+        }
+        .boton.patrones{
+            background: #6a4c93;
+        }
+        .boton.inicio{
+            background: #555;
         }
     </style>
 
 </head>
 <body>
     <header>
-        <h1> Resultados del analisis</h1>
+        <h1> Resultados del análisis</h1>
     </header>
     <div class="contenedor">
         <div class="tarjeta">
             <div class="resumen">
-             <h2>Resumen del analisis</h2>
+             <h2>Resumen del análisis</h2>
              <p>
                 CUPS analizados: 
                 <strong>
@@ -103,17 +131,28 @@
                 </strong>
              </p>
             </div>
-            <br>
+            <div class="botones">
             <a href="/analisis" class="boton">
-                Volver al analisis
+                <i class="fa-solid fa-arrow-left"></i>
+                Volver al análisis
             </a>
-            <a href="/" class="boton">
+            <a href="/" class="boton inicio">
+                <i class="fa-solid fa-house"></i>
                 Inicio
             </a> 
+            <a href="/exportar_excel" class="boton excel">
+                <i class="fa-solid fa-file-excel"></i>
+                Descargar excel
+            </a>
+            <a href="/deteccion_de_patrones" class="boton patrones">
+                <i class="fa-solid fa-chart-line"></i>
+                Detección de patrones
+            </a>
+            </div>
         </div>        
         <div class="tarjeta">
 
-            <h2>Resultados del analisis </h2>
+            <h2>Resultados del análisis </h2>
             {% for resultado in resultados %}
             <div class="tarjeta">
                 <h3>
@@ -164,14 +203,9 @@
         {% endfor %}
         </div>
 
+        
         <div class="tarjeta">
-            <h2>Resultados</h2>
-            <p>
-                Aqui aparecerán las coincidencias multiples
-            </p>
-        </div>
-        <div class="tarjeta">
-            <h2>Analisis automatico</h2>
+            <h2>Análisis automático</h2>
             {% if analisis %}
             <ul>
             {% for item in analisis %}
@@ -187,6 +221,43 @@
                 No se detectaron patrones repetidos
             </p>
             {% endif %}
+        </div>
+        <div class="tarjeta">
+            <h2>Resumen de coincidencias por CUPS</h2>
+            {% for resultado in resultados %}
+                {% if resultado.encontrado %}
+                <h3>
+                    CUPS: {{ resultado.cups }}
+                </h3>
+                <p>
+                    Total de apariciones:
+                    <strong>
+                        {{ resultado.coincidencias|length }}
+                    </strong>
+                </p>
+                <table>
+                    <tr>
+                        <th>ID ACTIVIDAD (Nº TDC)</th>
+                        <th>Archivos</th>
+                        <th>Hojas</th>
+                    </tr>
+                    {% for dato in resultado.coincidencias %}
+                    <tr>
+                        <td>
+                            {{ dato.datos["ID ACTIVIDAD (Nº TDC)"] }}
+                        </td>
+                        <td>
+                            {{ dato.archivo }}
+                        </td>
+                        <td>
+                            {{ dato.hoja }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     
