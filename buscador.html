@@ -1,70 +1,118 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
-    
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale1.0">
-    <title>Buscador CUPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale1.1">
+    <title>Analizador inteligente de CUPS</title>
+    <link 
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 0;
+            background:#f4f6f8;
+            margin:0;
+            padding:0;
         }
         header {
-            background: #1f4e79;
-            color: white;
-            padding: 20px;
-            text-align: center;
+            background:#1f4e79;
+            color:white;
+            padding:35px;
+            text-align:center;
+        }
+        header i {
+            font-size: 50px;
+        }
+        header h1 {
+            margin: 10px 0;
+            font-size: 32px;
+        }
+        header p {
+            font-size: 18px;
         }
         .contenedor {
-            width: 90%;
-            max-width: 1000px;
-            margin: 30px auto;
+            width:90%;
+            max-width:1100px;
+            margin:30px auto;
         }
         .tarjeta {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px #ccc;
+            background:white;
+            padding:25px;
+            margin-bottom:25px;
+            border-radius:15px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.12);
         }
         h2{
             color:#1f4e79;
         }
+        h2 i{
+            margin-right:10px;
+        }
 
         input{
-            width: 90%;
-            padding: 10px;
-            margin-bottom: 10px;
+            width:90%;
+            padding:12px;
+            border-radius:8px;
+            border:1px solid #ccc;
+            margin-bottom:15px;
         }
 
         button{
-            background: #1f4e79;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            background:#1f4e79;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:8px;
             cursor: pointer;
+            font-size:15px;
         }
         button:hover{
-            background: #163a5c;
+            background:#163a5c;
+        }
+        .boton-eliminar{
+            background:#b22222;
         }
 
         .archivo{
-            background: #eef3f8;
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 8px;
+            background:#eef3f8;
+            padding:18px;
+            margin-top:15px;
+            border-radius:10px;
         }
         .hojas{
-            margin-left: 20px;
+            margin-left:20px;
         }
         .info{
-            background: #fff9dc;
-            padding: 10px;
-            border-left: 5px solid orange;
+            background:#fff9dc;
+            border-left:6px solid orange;
+        }
+        .estadisticas {
+            flex:1;
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            text-align:center;
+            box-shadow:0 3px 10px #ddd;
+            margin-bottom: 25px;
+            gap: 20px;
+
+        }
+        .caja {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ccc;
+        }
+        .caja h3{
+            font-size: 28px;
+            color: #1f4e79;
+        }
+        .caja i{
+            font-size:35px;
+            color:#1f4e79;
+
         }
         
         </style>
@@ -72,13 +120,32 @@
 
 <body>
 <header>
-     <h1>Gestión y búsqueda de CUPS</h1>
-     <p>Consulta de datos desde archivos Excel</p>
+    <i class="fa-solid fa-chart-line"></i>
+     <h1>Analizador inteligente de CUPS</h1>
+     <p>Gestión, búsqueda y análisis de información desde archivos Excel</p>
 </header>
 <div class="contenedor">
+    <div class="estadisticas">
+        <div class="caja">
+            <i class="fa-solid fa-file-excel"></i>
+            <h3>
+                {{ archivos|length }}
+            </h3>
+            <p>
+                Archivos cargados
+            </p>
+        </div>     
+        
+    </div>
     <div class="tarjeta">
 
-    <h2>Subir archivo Excel</h2>
+    <h2>
+    <i class="fa-solid fa-upload"></i>
+        Gestión de archivos
+    </h2>
+    <p>
+        Seleccione un archivo.
+    </p>
 
     <form action="/subir"
           method="post"
@@ -97,7 +164,13 @@
 </div>
 
 <div class="tarjeta">
-<h2>Buscar CUPS</h2>
+<h2>
+<i class="fa-solid fa-magnifying-glass"></i>
+    Búsqueda individual
+</h2>
+<p>
+    Introduzca el CUPS a consultar
+</p>
 
     <form action="/buscar"
           method="post">
@@ -113,16 +186,23 @@
 
     </form>
 <hr>
-<h2>Analisis de multiples CUPS</h2>
+<h2>
+    <i class="fa-solid fa-chart-column"></i>
+    Análisis múltiple</h2>
+    <p>
+        Análisis de varios CUPS simultáneamente.
+    </p>
 <a href="/analisis">
     <button type="button">
-        Abrir analisis
+        Abrir análisis
     </button>
 </a>
 </div>
 <div class="tarjeta"> 
 
-    <h2>Excels cargados</h2>
+    <h2>
+        <i class="fa-solid fa-folder-open"></i>
+        Excels cargados</h2>
     {% if archivos %}
 
 <a href="/eliminar_todos"
@@ -130,9 +210,10 @@
 
     <button
         type="button"
-        style="background:#b22222; margin-bottom:15px;">
+        class="boton-rojo">
+        <i class="fa-solid fa-trash"></i>
 
-        Eliminar todos los Excel
+        Eliminar todos
 
     </button>
 
@@ -144,7 +225,9 @@
 
         {% for archivo in archivos %}
 <div class="archivo">
-            <h3>{{ archivo.nombre }}</h3>
+            <h3>
+                <i class="fa-solid fa-file-excel"></i>
+                {{ archivo.nombre }}</h3>
 <p>
     Hojas disponibles:
 </p>
@@ -161,6 +244,8 @@
    onclick="return confirm('¿Seguro que deseas eliminar este archivo?');">
 
     <button type="button">
+        <i class="fa-solid fa-trash"></i>
+
         Eliminar archivo
     </button>
 
@@ -175,7 +260,10 @@
     {% endif %}
 </div>
 <div class="tarjeta info">
-    <h3> Ayuda</h3>
+    <h2> 
+        <i class="fa-solid fa-circle-info"></i>
+
+        Recomendaciones </h2>
     <ul>
         <li>Suba un archivo de excel antes de buscar.</li>
         <li>Introduzca el CUPS completo</li>
