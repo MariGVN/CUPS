@@ -2,8 +2,8 @@ from flask import Flask, render_template, request
 import pandas as pd
 
 app = Flask(__name__)
-
-archivo = "AYESA.xlsx"
+#Aqui agregaar el archivo a analizar .xlsx
+archivo = "
 
 def buscar_cups(cups_buscado):
     cups_buscado = cups_buscado.strip().upper()
