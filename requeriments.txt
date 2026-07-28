@@ -1,5 +1,5 @@
 pandas
 openpyxl
 Flask
-sqlite3
-
+python-docx
+pyinstaller
